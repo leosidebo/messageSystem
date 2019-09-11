@@ -5,6 +5,9 @@ public class test {
 
         Scanner sc = new Scanner(System.in);
         int input;
+        int length;
+        String msgInput;
+        Message msg;
 
         do {
             do {
@@ -35,7 +38,21 @@ public class test {
 
             if (input == 2)
             {
+                do {
+                    System.out.println("Tryck Enter när du är klar! (Max 140 tecken)");
+                    System.out.print("Vänligen ange ditt meddelande: ");
+                    msgInput = sc.nextLine();
+                    length = msgInput.length();
 
+                    if (length > 140) {
+                        System.out.println("Ditt meddelande var för långt. Vänligen försök igen.");
+                        System.out.print("Tryck Enter när du vill gå vidare.\n");
+                        sc.nextLine();
+                    }
+
+                } while (length > 140);
+
+                msg = new Message(msgInput);
             }
 
         } while(input != 6);
