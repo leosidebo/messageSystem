@@ -35,7 +35,7 @@ public class test {
 
             if (input == 2)
             {
-                
+
             }
 
         } while(input != 6);
