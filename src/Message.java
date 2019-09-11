@@ -13,4 +13,11 @@ public class Message {
         updatedAt = new Date();
     }
 
+    @Override
+    public String toString() {
+        return  "Skapad: " + createdAt + "\n" +
+                "Senast uppdaterad: " + updatedAt + "\n" +
+                "Meddelande: " + message + "\n" +
+                "Författare: " + author + "\n";
+    }
 }

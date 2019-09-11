@@ -1,8 +1,12 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) {
 
+        ArrayList<Message> msgList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int input;
         int length;
@@ -21,10 +25,11 @@ public class test {
                 System.out.print("\nAnge ditt val, tryck sedan Enter: ");
                 input = sc.nextInt();
                 sc.nextLine();
+                System.out.println("");
 
                 if (input < 1 || input > 6)
                 {
-                    System.out.println("\nDet gick inte att läsa in ditt val. Vänligen försök igen.");
+                    System.out.println("Det gick inte att läsa in ditt val. Vänligen försök igen.");
                     System.out.print("Tryck Enter när du vill gå vidare.");
                     sc.nextLine();
                 }
@@ -33,7 +38,11 @@ public class test {
 
             if (input == 1)
             {
-
+                for (int i = 0; i < msgList.size(); i++)
+                {
+                    System.out.println("Meddelande " + (i + 1) + ":");
+                    System.out.println(msgList.get(i));
+                }
             }
 
             if (input == 2)
@@ -53,6 +62,7 @@ public class test {
                 } while (length > 140);
 
                 msg = new Message(msgInput);
+                msgList.add(msg);
             }
 
         } while(input != 6);
