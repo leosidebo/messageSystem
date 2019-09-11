@@ -13,6 +13,11 @@ public class Message {
         updatedAt = new Date();
     }
 
+    public void msgChange(String s) {
+        message = s;
+        updatedAt = new Date();
+    }
+
     @Override
     public String toString() {
         return  "Skapad: " + createdAt + "\n" +

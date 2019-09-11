@@ -10,6 +10,7 @@ public class test {
         Scanner sc = new Scanner(System.in);
         int input;
         int length;
+        int update;
         String msgInput;
         Message msg;
 
@@ -63,6 +64,36 @@ public class test {
 
                 msg = new Message(msgInput);
                 msgList.add(msg);
+            }
+
+            if (input == 3)
+            {
+                do {
+                    System.out.print("Meddelande som ska uppdateras: ");
+                    update = sc.nextInt();
+                    sc.nextLine();
+
+                    if(update < 1 || update > msgList.size()) {
+                        System.out.println("Det meddelande du ville ändra finns inte. Vänligen försök igen.");
+                        System.out.print("Tryck Enter för att gå vidare.");
+                        sc.nextLine();
+                        System.out.println();
+                    }
+
+                } while (update < 1 || update > msgList.size());
+                do {
+                    System.out.print("\nDet uppdaterade meddelandet (Max 140 tecken): ");
+                    msgInput = sc.nextLine();
+                    length = msgInput.length();
+
+                    if (length > 140) {
+                        System.out.println("Ditt meddelande var för långt. Vänligen försök igen.");
+                        System.out.print("Tryck Enter när du vill gå vidare.\n");
+                        sc.nextLine();
+                    }
+                } while (length > 140);
+
+                msgList.get(update - 1).msgChange(msgInput);
             }
 
         } while(input != 6);
