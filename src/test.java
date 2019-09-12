@@ -1,10 +1,14 @@
+import com.sun.istack.internal.NotNull;
+import sun.misc.resources.Messages;
+
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         ArrayList<Message> msgList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -13,6 +17,9 @@ public class test {
         int update;
         String msgInput;
         Message msg;
+
+        // PrintWriter fileSaver = new PrintWriter(new BufferedWriter(new FileWriter("C:/code/messages.txt", true)));
+        // BufferedReader fileReader = new BufferedReader(new FileReader("C:/code/messages.txt"));
 
         do {
             do {
@@ -44,6 +51,9 @@ public class test {
                     System.out.println("Meddelande " + (i + 1) + ":");
                     System.out.println(msgList.get(i));
                 }
+
+                System.out.print("Tryck Enter när du vill gå vidare.");
+                sc.nextLine();
             }
 
             if (input == 2)
@@ -96,8 +106,43 @@ public class test {
                 msgList.get(update - 1).msgChange(msgInput);
             }
 
+            if (input == 4) {
+                /* for (int i = 0; i < msgList.size(); i++) {
+                    fileSaver.println(msgList.get(i).fileSaver);
+                }
+
+                fileSaver.close(); */
+
+                FileOutputStream fileReader = new FileOutputStream(new File("C:/code/messageSystem/messages.txt"), true);
+                ObjectOutputStream fileSaver = new ObjectOutputStream(fileReader);
+
+                fileSaver.writeObject(msgList);
+
+            }
+
+            if (input == 5) {
+
+                /* FileOutputStream fileReader = new FileOutputStream(new File("C:/code/messages.txt"));
+                ObjectOutputStream fileSaver = new ObjectOutputStream(fileReader); */
+
+                // msgList.add(new Message(fileReader.readLine(), fileReader.readLine()), fileReader.readLine(), fileReader.readLine());
+
+                msgList.addAll(readMessages());
+            }
+
         } while(input != 6);
 
 
+    }
+
+    private static ArrayList<Message> readMessages() throws IOException, ClassNotFoundException {
+        ArrayList<Message> messages = new ArrayList<Message>();
+
+        FileInputStream fi = new FileInputStream("C:/code/messageSystem/messages.txt");
+        ObjectInputStream oi = new ObjectInputStream(fi);
+
+        messages = (ArrayList<Message>) oi.readObject();
+
+        return messages;
     }
 }
